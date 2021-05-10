@@ -32,8 +32,11 @@ public class Algorithm {
     public static List<Result> computeFirstFollow(String startingSymbol, List<Rule> rules) {
 
         List<Result> results = new ArrayList<Result>();
+        Result result = new Result("S","simple begin","d");
 
-        // IMPLEMENT YOUR ALGORITHM HERE
+        for(Rule c : rules ){
+            c.getRight();
+        }
 
         return results;
     }
@@ -44,7 +47,19 @@ public class Algorithm {
     public static String helperFunction(String whatever) {
         return "WHAT YOU NEED";
     }
-
+    public static void main(String[] args){
+        String start = "S";
+        List<Rule> rules = new ArrayList<Rule>();
+        Rule rule1 = new Rule("S","simple | begin S end");
+        /*
+        output should be
+        new Result("S", "simple, begin", "end, EOF"),
+        new Result("simple", "simple", ""),
+        new Result("begin", "begin", ""),
+        new Result("end", "end", ""),
+         */
+        rules.add(rule1);
+    }
 
 }
 
