@@ -1,5 +1,6 @@
 package task2;
 
+import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
 import java.util.List;
 // the imports give you some hints of what we used to implement it
@@ -44,20 +45,33 @@ public class Algorithm {
         symbols.remove("|");
 
         for(String firstset: symbols){
-            for(Rule leftsee: rules) {
-                if (!(firstset.equals(leftsee.getLeft()))){
-                    firstSet.put(firstset,Arrays.asList(firstset));
+            for (Rule rule : rules) {
+
+                //for(Rule leftsee: rules) {
+                if (!(firstset.equals(rule))) {
+                    firstSet.put(firstset, Arrays.asList(firstset));
+                } else {
+                    firstSet.put(firstset, Arrays.asList("todo"));
                 }
-                else{
-                    firstSet.put(firstset,Arrays.asList("todo"));
+            } //Result ok = new Result(symbols,firstSet,followSet);
+        }
+        for(String followset: symbols){
+
+            for(Rule leftsee: rules) {
+                if (!(followset.equals(leftsee.getLeft()))) {
+                    followSet.put(followset, Arrays.asList(""));
+                }else{
+                    followSet.put(followset,Arrays.asList("todo"));
                 }
             }
         }
         for(String key: firstSet.keySet()){
-            System.out.println("key : " + key + " value : " + firstSet.get(key));
+            System.out.println("symbol : " + key + " first : " + firstSet.get(key));
+        }
+        for(String key: followSet.keySet()){
+            System.out.println("symbol : " + key + " follow : " + followSet.get(key));
         }
         System.out.println("all symbols: " + symbols);
-
 
         return results;
     }
