@@ -31,12 +31,33 @@ public class Algorithm {
      */
     public static List<Result> computeFirstFollow(String startingSymbol, List<Rule> rules) {
 
-        List<Result> results = new ArrayList<Result>();
-        Result result = new Result("S","simple begin","d");
+        List<Result> results = new ArrayList<Result>();//used for results
+        HashMap<String,List<String>> firstSet = new HashMap<String,List<String>>();//used for firstset
+        HashMap<String,List<String>>  followSet = new HashMap<String,List<String>>();//used for followset
+        Set<String> symbols = new HashSet<>(); //all symbols
 
-        for(Rule c : rules ){
-            c.getRight();
+
+        for(Rule allSymbols : rules){//get all symbols
+            symbols.add(allSymbols.getLeft());//on the left side+
+            symbols.addAll(allSymbols.getRight());
         }
+        symbols.remove("|");
+
+        for(String firstset: symbols){
+            for(Rule leftsee: rules) {
+                if (!(firstset.equals(leftsee.getLeft()))){
+                    firstSet.put(firstset,Arrays.asList(firstset));
+                }
+                else{
+                    firstSet.put(firstset,Arrays.asList("todo"));
+                }
+            }
+        }
+        for(String key: firstSet.keySet()){
+            System.out.println("key : " + key + " value : " + firstSet.get(key));
+        }
+        System.out.println("all symbols: " + symbols);
+
 
         return results;
     }
@@ -50,15 +71,27 @@ public class Algorithm {
     public static void main(String[] args){
         String start = "S";
         List<Rule> rules = new ArrayList<Rule>();
-        Rule rule1 = new Rule("S","simple | begin S end");
+        Rule rule1 = new Rule("S","simple | begin Send | R");
+        Rule rule2 = new Rule("R", "a S Q e | EPSILON");
+        Rule rule3 = new Rule("Q", "EPSILON");
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
+
+        System.out.print(computeFirstFollow(start,rules));
         /*
         output should be
         new Result("S", "simple, begin", "end, EOF"),
+        new Result("R", "a, EPSILON", "EOF"),
+        new Result("Q", "EPSILON", "e"),
         new Result("simple", "simple", ""),
         new Result("begin", "begin", ""),
         new Result("end", "end", ""),
+        new Result("a", "a", ""),
+        new Result("e", "e", ""),
+        new Result("EPSILON", "EPSILON", ""),
          */
-        rules.add(rule1);
+
     }
 
 }
