@@ -1,4 +1,4 @@
-// Generated from C:\Users\danie\Downloads\Exercise2\Task3\Task3\src\Task3.g4 by ANTLR 4.9.2
+// Generated from C:\Users\danie\Documents\Studium\PP\Exercise2\Task3\Task3\src\Task3.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -16,7 +16,7 @@ public class Task3Parser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		A=1, B=2, C=3, WS=4, LEFTPART=5, RIGHTPART=6;
+		A=1, B=2, C=3, WS=4, X_=5, Y_=6;
 	public static final int
 		RULE_compilationUnit = 0, RULE_start = 1;
 	private static String[] makeRuleNames() {
@@ -34,7 +34,7 @@ public class Task3Parser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "A", "B", "C", "WS", "LEFTPART", "RIGHTPART"
+			null, "A", "B", "C", "WS", "X_", "Y_"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -128,8 +128,8 @@ public class Task3Parser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public TerminalNode LEFTPART() { return getToken(Task3Parser.LEFTPART, 0); }
-		public TerminalNode RIGHTPART() { return getToken(Task3Parser.RIGHTPART, 0); }
+		public TerminalNode X_() { return getToken(Task3Parser.X_, 0); }
+		public TerminalNode Y_() { return getToken(Task3Parser.Y_, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -147,31 +147,20 @@ public class Task3Parser extends Parser {
 	public final StartContext start() throws RecognitionException {
 		StartContext _localctx = new StartContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_start);
+		int _la;
 		try {
-			setState(9);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case LEFTPART:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(6);
-				match(LEFTPART);
-				}
-				break;
-			case RIGHTPART:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(7);
-				match(RIGHTPART);
-				}
-				break;
-			case EOF:
-				enterOuterAlt(_localctx, 3);
-				{
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(6);
+			_la = _input.LA(1);
+			if ( !(_la==X_ || _la==Y_) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -186,10 +175,9 @@ public class Task3Parser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\b\16\4\2\t\2\4\3"+
-		"\t\3\3\2\3\2\3\3\3\3\3\3\5\3\f\n\3\3\3\2\2\4\2\4\2\2\2\r\2\6\3\2\2\2\4"+
-		"\13\3\2\2\2\6\7\5\4\3\2\7\3\3\2\2\2\b\f\7\7\2\2\t\f\7\b\2\2\n\f\3\2\2"+
-		"\2\13\b\3\2\2\2\13\t\3\2\2\2\13\n\3\2\2\2\f\5\3\2\2\2\3\13";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\b\13\4\2\t\2\4\3"+
+		"\t\3\3\2\3\2\3\3\3\3\3\3\2\2\4\2\4\2\3\3\2\7\b\2\b\2\6\3\2\2\2\4\b\3\2"+
+		"\2\2\6\7\5\4\3\2\7\3\3\2\2\2\b\t\t\2\2\2\t\5\3\2\2\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

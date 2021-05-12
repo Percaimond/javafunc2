@@ -28,9 +28,10 @@ compilationUnit:
 // DON'T MODIFY ABOVE THIS LINE
 
 // TODO: insert rules here
-start:LEFTPART|RIGHTPART|;
-LEFTPART:A X_ B B B;
-fragment X_:A X_ B B B|;
-RIGHTPART:A Y_ B B B C;
-fragment Y_:(A Y_ B B B C)|;
+
+start:X_|Y_;
+fragment X_: ('a' X_ 'b' 'b' 'b');
+fragment Y_: ('a' Y_ 'b' 'b' 'b' 'c')|;
+
+
 

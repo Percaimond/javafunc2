@@ -46,32 +46,38 @@ public class Algorithm {
 
         for(String firstset: symbols){
             for (Rule rule : rules) {
-
-                //for(Rule leftsee: rules) {
-                if (!(firstset.equals(rule))) {
-                    firstSet.put(firstset, Arrays.asList(firstset));
-                } else {
+                if ((rule.getLeft().equals(firstset))) {
                     firstSet.put(firstset, Arrays.asList("todo"));
+                    break;
+                } else {
+                    firstSet.put(firstset, Arrays.asList(firstset));
                 }
             } //Result ok = new Result(symbols,firstSet,followSet);
         }
-        for(String followset: symbols){
 
+        for(String followset: symbols){
             for(Rule leftsee: rules) {
-                if (!(followset.equals(leftsee.getLeft()))) {
-                    followSet.put(followset, Arrays.asList(""));
-                }else{
+                if ((leftsee.getLeft().equals(followset))) {
                     followSet.put(followset,Arrays.asList("todo"));
+                    break;
+                }else{
+                     followSet.put(followset, Arrays.asList(""));
                 }
             }
         }
-        for(String key: firstSet.keySet()){
+
+
+
+
+
+
+        for(String key: firstSet.keySet()){//output all firstsets
             System.out.println("symbol : " + key + " first : " + firstSet.get(key));
         }
-        for(String key: followSet.keySet()){
+        for(String key: followSet.keySet()){//output all followsets
             System.out.println("symbol : " + key + " follow : " + followSet.get(key));
         }
-        System.out.println("all symbols: " + symbols);
+        System.out.println("all symbols: " + symbols);//output all symbols
 
         return results;
     }
@@ -85,6 +91,7 @@ public class Algorithm {
     public static void main(String[] args){
         String start = "S";
         List<Rule> rules = new ArrayList<Rule>();
+
         Rule rule1 = new Rule("S","simple | begin Send | R");
         Rule rule2 = new Rule("R", "a S Q e | EPSILON");
         Rule rule3 = new Rule("Q", "EPSILON");
