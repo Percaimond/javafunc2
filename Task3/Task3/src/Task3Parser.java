@@ -16,7 +16,7 @@ public class Task3Parser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		A=1, B=2, C=3, WS=4, X_=5, Y_=6;
+		A=1, B=2, C=3, WS=4, X=5, Y=6;
 	public static final int
 		RULE_compilationUnit = 0, RULE_start = 1;
 	private static String[] makeRuleNames() {
@@ -34,7 +34,7 @@ public class Task3Parser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "A", "B", "C", "WS", "X_", "Y_"
+			null, "A", "B", "C", "WS", "X", "Y"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -128,8 +128,8 @@ public class Task3Parser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public TerminalNode X_() { return getToken(Task3Parser.X_, 0); }
-		public TerminalNode Y_() { return getToken(Task3Parser.Y_, 0); }
+		public TerminalNode X() { return getToken(Task3Parser.X, 0); }
+		public TerminalNode Y() { return getToken(Task3Parser.Y, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -153,7 +153,7 @@ public class Task3Parser extends Parser {
 			{
 			setState(6);
 			_la = _input.LA(1);
-			if ( !(_la==X_ || _la==Y_) ) {
+			if ( !(_la==X || _la==Y) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {

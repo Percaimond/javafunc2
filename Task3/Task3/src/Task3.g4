@@ -29,9 +29,14 @@ compilationUnit:
 
 // TODO: insert rules here
 
-start:X_|Y_;
-fragment X_: ('a' X_ 'b' 'b' 'b');
-fragment Y_: ('a' Y_ 'b' 'b' 'b' 'c')|;
+start: X
+     | Y
+     ;
 
+fragment X:(A X B B B)
+           |
+           ;
 
-
+fragment Y:(A Y B B B C)
+           |
+           ;

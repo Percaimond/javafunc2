@@ -33,8 +33,8 @@ public class Algorithm {
     public static List<Result> computeFirstFollow(String startingSymbol, List<Rule> rules) {
 
         List<Result> results = new ArrayList<Result>();//used for results
-        HashMap<String,List<String>> firstSet = new HashMap<String,List<String>>();//used for firstset
-        HashMap<String,List<String>>  followSet = new HashMap<String,List<String>>();//used for followset
+        HashMap<String,Set<String>> firstSet = new HashMap<String,Set<String>>();//used for firstset
+        HashMap<String,Set<String>>  followSet = new HashMap<String,Set<String>>();//used for followset
         Set<String> symbols = new HashSet<>(); //all symbols
 
 
@@ -44,32 +44,33 @@ public class Algorithm {
         }
         symbols.remove("|");
 
-        for(String firstset: symbols){
+        for(String symbol: symbols){
             for (Rule rule : rules) {
-                if ((rule.getLeft().equals(firstset))) {
-                    firstSet.put(firstset, Arrays.asList("todo"));
+                Set<String> tempresults = new HashSet<>();//used to collect all temp results
+                if ((rule.getLeft().equals(symbol))) {
+                    tempresults.add("todo");
+                    firstSet.put(symbol,tempresults);
                     break;
                 } else {
-                    firstSet.put(firstset, Arrays.asList(firstset));
-                }
-            } //Result ok = new Result(symbols,firstSet,followSet);
-        }
-
-        for(String followset: symbols){
-            for(Rule leftsee: rules) {
-                if ((leftsee.getLeft().equals(followset))) {
-                    followSet.put(followset,Arrays.asList("todo"));
-                    break;
-                }else{
-                     followSet.put(followset, Arrays.asList(""));
+                    tempresults.add(symbol);
+                    firstSet.put(symbol,tempresults);
                 }
             }
         }
-
-
-
-
-
+        for(String symbol: symbols){
+            for(Rule rule: rules) {
+                Set<String> tempresults = new HashSet<>();//used to collect all temp results
+                if ((rule.getLeft().equals(symbol))) {
+                    if(symbol.equals(startingSymbol))
+                        tempresults.add("EOF");
+                        followSet.put(symbol,tempresults);
+                    break;
+                }else{
+                    tempresults.add("");
+                    followSet.put(symbol,tempresults);
+                }
+            }
+        }
 
         for(String key: firstSet.keySet()){//output all firstsets
             System.out.println("symbol : " + key + " first : " + firstSet.get(key));
@@ -79,11 +80,36 @@ public class Algorithm {
         }
         System.out.println("all symbols: " + symbols);//output all symbols
 
+        /*
+        add followset and firstset to results
+         */
+
+
+
         return results;
     }
 
     
     // DECLARE HELPER STATIC FUNCTIONs HERE (IN CASE YOU NEED THEM)
+    public static Stream<Rule> ruleReader(String rawLine) {
+        String[] parts = rawLine.split("->");
+        String head = parts[0].trim();
+        String tail = parts[1].trim();
+
+        String[] tailParts = null;
+        if (tail.indexOf("|") != -1) {
+            tailParts = tail.split("\\|");
+        } else {
+            tailParts = new String[1];
+            tailParts[0] = tail;
+        }
+        List<Rule> rules = new ArrayList<Rule>();
+        for (String tp : tailParts) {
+            rules.add(new Rule(head, tp));
+
+        }
+        return rules.stream();
+    }
 
     public static String helperFunction(String whatever) {
         return "WHAT YOU NEED";
@@ -100,6 +126,30 @@ public class Algorithm {
         rules.add(rule3);
 
         System.out.print(computeFirstFollow(start,rules));
+        /*List<Rule> jrules = Arrays.asList(rules).stream()
+                .flatMap((s) -> ruleReader(s))
+                .collect(Collectors.toList());
+        // Print the rules*/
+        rules.stream().forEachOrdered(System.out::println);
+
+
+        /*for(Rule ok: rules ){
+            String rubo = ok.getRight().toString();
+            String[] output = rubo.split("(\\h\\|)");
+            for (String schwuchtel: output){
+                //System.out.print(schwuchtel);
+            }
+            String search = ok.getRight().toString();
+            String segments[] = search.split("(\\|)");
+            System.out.print(Arrays.toString(segments));
+        }*/
+        /*
+        String trytr = "simple | begin Send | R";
+        String[] output = trytr.split("(\\h\\|)");
+        for (String schwuchtel: output){
+           // System.out.print(schwuchtel);
+        }*/
+
         /*
         output should be
         new Result("S", "simple, begin", "end, EOF"),
