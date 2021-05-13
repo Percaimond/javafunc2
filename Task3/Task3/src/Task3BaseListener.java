@@ -1,4 +1,4 @@
-// Generated from C:\Users\danie\Documents\Studium\PP\Exercise2\Task3\Task3\src\Task3.g4 by ANTLR 4.9.2
+// Generated from E:\projects\javafunc2\Task3\Task3\src\Task3.g4 by ANTLR 4.9.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -34,6 +34,42 @@ public class Task3BaseListener implements Task3Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStart(Task3Parser.StartContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEm(Task3Parser.EmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEm(Task3Parser.EmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterX(Task3Parser.XContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitX(Task3Parser.XContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterY(Task3Parser.YContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitY(Task3Parser.YContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

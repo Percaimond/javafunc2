@@ -49,7 +49,7 @@ public class Ex2Task2Test
         rules.stream().forEachOrdered(System.out::println);
 
         // Run your Algorithm
-        List<Result> userResults = Algorithm.computeFirstFollow("S", rules);
+        List<Result> userResults = alg23.computeFirstFollow("S", rules);
 
         performChecksOn(
             userResults, expectedResults);
@@ -94,7 +94,7 @@ public class Ex2Task2Test
         rules.stream().forEachOrdered(System.out::println);
 
         // Run your Algorithm
-        List<Result> userResults = Algorithm.computeFirstFollow("start", rules);
+        List<Result> userResults = alg23.computeFirstFollow("start", rules);
 
         // Verify your result matches the expected result
         performChecksOn(

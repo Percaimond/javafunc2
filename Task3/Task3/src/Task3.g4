@@ -29,14 +29,29 @@ compilationUnit:
 
 // TODO: insert rules here
 
-start: X
-     | Y
+
+/*start : ( leins | lzwei | ' ');
+
+leins : ( A B B B | A leins B B B );
+
+lzwei : ( A lzwei B B B C | A B B B C );*/
+
+
+
+
+start:x
+     |y
+     |em
+
      ;
 
-fragment X:(A X B B B)
-           |
-           ;
+em:' ' ;
 
-fragment Y:(A Y B B B C)
-           |
-           ;
+
+x:(A x B B B)
+ |(A B B B)
+ ;
+
+y:(A y B B B C)
+ |(A B B B C)
+ ;
