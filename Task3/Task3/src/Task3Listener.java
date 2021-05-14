@@ -27,33 +27,23 @@ public interface Task3Listener extends ParseTreeListener {
 	 */
 	void exitStart(Task3Parser.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Task3Parser#em}.
+	 * Enter a parse tree produced by {@link Task3Parser#leftlanguage}.
 	 * @param ctx the parse tree
 	 */
-	void enterEm(Task3Parser.EmContext ctx);
+	void enterLeftlanguage(Task3Parser.LeftlanguageContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Task3Parser#em}.
+	 * Exit a parse tree produced by {@link Task3Parser#leftlanguage}.
 	 * @param ctx the parse tree
 	 */
-	void exitEm(Task3Parser.EmContext ctx);
+	void exitLeftlanguage(Task3Parser.LeftlanguageContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Task3Parser#x}.
+	 * Enter a parse tree produced by {@link Task3Parser#rightlanguage}.
 	 * @param ctx the parse tree
 	 */
-	void enterX(Task3Parser.XContext ctx);
+	void enterRightlanguage(Task3Parser.RightlanguageContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Task3Parser#x}.
+	 * Exit a parse tree produced by {@link Task3Parser#rightlanguage}.
 	 * @param ctx the parse tree
 	 */
-	void exitX(Task3Parser.XContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Task3Parser#y}.
-	 * @param ctx the parse tree
-	 */
-	void enterY(Task3Parser.YContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Task3Parser#y}.
-	 * @param ctx the parse tree
-	 */
-	void exitY(Task3Parser.YContext ctx);
+	void exitRightlanguage(Task3Parser.RightlanguageContext ctx);
 }

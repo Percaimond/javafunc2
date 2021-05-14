@@ -39,37 +39,25 @@ public class Task3BaseListener implements Task3Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEm(Task3Parser.EmContext ctx) { }
+	@Override public void enterLeftlanguage(Task3Parser.LeftlanguageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEm(Task3Parser.EmContext ctx) { }
+	@Override public void exitLeftlanguage(Task3Parser.LeftlanguageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX(Task3Parser.XContext ctx) { }
+	@Override public void enterRightlanguage(Task3Parser.RightlanguageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX(Task3Parser.XContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterY(Task3Parser.YContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitY(Task3Parser.YContext ctx) { }
+	@Override public void exitRightlanguage(Task3Parser.RightlanguageContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

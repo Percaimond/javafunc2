@@ -27,31 +27,14 @@ compilationUnit:
 
 // DON'T MODIFY ABOVE THIS LINE
 
-// TODO: insert rules here
-
-
-/*start : ( leins | lzwei | ' ');
-
-leins : ( A B B B | A leins B B B );
-
-lzwei : ( A lzwei B B B C | A B B B C );*/
-
-
-
-
-start:x
-     |y
-     |em
-
+start:leftlanguage
+     |rightlanguage
      ;
 
-em:' ' ;
+leftlanguage:A leftlanguage B B B
+            |A B B B
+            ;
 
-
-x:(A x B B B)
- |(A B B B)
- ;
-
-y:(A y B B B C)
- |(A B B B C)
- ;
+rightlanguage:A rightlanguage B B B C
+             |A B B B C
+             ;

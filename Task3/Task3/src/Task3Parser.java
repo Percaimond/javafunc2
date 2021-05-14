@@ -16,25 +16,25 @@ public class Task3Parser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, A=2, B=3, C=4, WS=5;
+		A=1, B=2, C=3, WS=4;
 	public static final int
-		RULE_compilationUnit = 0, RULE_start = 1, RULE_em = 2, RULE_x = 3, RULE_y = 4;
+		RULE_compilationUnit = 0, RULE_start = 1, RULE_leftlanguage = 2, RULE_rightlanguage = 3;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"compilationUnit", "start", "em", "x", "y"
+			"compilationUnit", "start", "leftlanguage", "rightlanguage"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "' '", "'a'", "'b'", "'c'"
+			null, "'a'", "'b'", "'c'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, "A", "B", "C", "WS"
+			null, "A", "B", "C", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -112,7 +112,7 @@ public class Task3Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(10);
+			setState(8);
 			start();
 			}
 		}
@@ -128,14 +128,11 @@ public class Task3Parser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public XContext x() {
-			return getRuleContext(XContext.class,0);
+		public LeftlanguageContext leftlanguage() {
+			return getRuleContext(LeftlanguageContext.class,0);
 		}
-		public YContext y() {
-			return getRuleContext(YContext.class,0);
-		}
-		public EmContext em() {
-			return getRuleContext(EmContext.class,0);
+		public RightlanguageContext rightlanguage() {
+			return getRuleContext(RightlanguageContext.class,0);
 		}
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -155,28 +152,21 @@ public class Task3Parser extends Parser {
 		StartContext _localctx = new StartContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_start);
 		try {
-			setState(15);
+			setState(12);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(12);
-				x();
+				setState(10);
+				leftlanguage();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(13);
-				y();
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(14);
-				em();
+				setState(11);
+				rightlanguage();
 				}
 				break;
 			}
@@ -192,80 +182,56 @@ public class Task3Parser extends Parser {
 		return _localctx;
 	}
 
-	public static class EmContext extends ParserRuleContext {
-		public EmContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_em; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).enterEm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).exitEm(this);
-		}
-	}
-
-	public final EmContext em() throws RecognitionException {
-		EmContext _localctx = new EmContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_em);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(17);
-			match(T__0);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class XContext extends ParserRuleContext {
+	public static class LeftlanguageContext extends ParserRuleContext {
 		public TerminalNode A() { return getToken(Task3Parser.A, 0); }
-		public XContext x() {
-			return getRuleContext(XContext.class,0);
+		public LeftlanguageContext leftlanguage() {
+			return getRuleContext(LeftlanguageContext.class,0);
 		}
 		public List<TerminalNode> B() { return getTokens(Task3Parser.B); }
 		public TerminalNode B(int i) {
 			return getToken(Task3Parser.B, i);
 		}
-		public XContext(ParserRuleContext parent, int invokingState) {
+		public LeftlanguageContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_x; }
+		@Override public int getRuleIndex() { return RULE_leftlanguage; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).enterX(this);
+			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).enterLeftlanguage(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).exitX(this);
+			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).exitLeftlanguage(this);
 		}
 	}
 
-	public final XContext x() throws RecognitionException {
-		XContext _localctx = new XContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_x);
+	public final LeftlanguageContext leftlanguage() throws RecognitionException {
+		LeftlanguageContext _localctx = new LeftlanguageContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_leftlanguage);
 		try {
-			setState(29);
+			setState(24);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				{
-				setState(19);
+				setState(14);
 				match(A);
+				setState(15);
+				leftlanguage();
+				setState(16);
+				match(B);
+				setState(17);
+				match(B);
+				setState(18);
+				match(B);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
 				setState(20);
-				x();
+				match(A);
 				setState(21);
 				match(B);
 				setState(22);
@@ -273,22 +239,6 @@ public class Task3Parser extends Parser {
 				setState(23);
 				match(B);
 				}
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				{
-				setState(25);
-				match(A);
-				setState(26);
-				match(B);
-				setState(27);
-				match(B);
-				setState(28);
-				match(B);
-				}
-				}
 				break;
 			}
 		}
@@ -303,71 +253,67 @@ public class Task3Parser extends Parser {
 		return _localctx;
 	}
 
-	public static class YContext extends ParserRuleContext {
+	public static class RightlanguageContext extends ParserRuleContext {
 		public TerminalNode A() { return getToken(Task3Parser.A, 0); }
-		public YContext y() {
-			return getRuleContext(YContext.class,0);
+		public RightlanguageContext rightlanguage() {
+			return getRuleContext(RightlanguageContext.class,0);
 		}
 		public List<TerminalNode> B() { return getTokens(Task3Parser.B); }
 		public TerminalNode B(int i) {
 			return getToken(Task3Parser.B, i);
 		}
 		public TerminalNode C() { return getToken(Task3Parser.C, 0); }
-		public YContext(ParserRuleContext parent, int invokingState) {
+		public RightlanguageContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_y; }
+		@Override public int getRuleIndex() { return RULE_rightlanguage; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).enterY(this);
+			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).enterRightlanguage(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).exitY(this);
+			if ( listener instanceof Task3Listener ) ((Task3Listener)listener).exitRightlanguage(this);
 		}
 	}
 
-	public final YContext y() throws RecognitionException {
-		YContext _localctx = new YContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_y);
+	public final RightlanguageContext rightlanguage() throws RecognitionException {
+		RightlanguageContext _localctx = new RightlanguageContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_rightlanguage);
 		try {
-			setState(43);
+			setState(38);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				{
-				setState(31);
+				setState(26);
 				match(A);
-				setState(32);
-				y();
-				setState(33);
+				setState(27);
+				rightlanguage();
+				setState(28);
 				match(B);
-				setState(34);
+				setState(29);
 				match(B);
-				setState(35);
+				setState(30);
 				match(B);
-				setState(36);
+				setState(31);
 				match(C);
-				}
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				{
-				setState(38);
+				setState(33);
 				match(A);
-				setState(39);
+				setState(34);
 				match(B);
-				setState(40);
+				setState(35);
 				match(B);
-				setState(41);
+				setState(36);
 				match(B);
-				setState(42);
+				setState(37);
 				match(C);
-				}
 				}
 				break;
 			}
@@ -384,18 +330,17 @@ public class Task3Parser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\7\60\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\3\3\3\3\3\5\3\22\n\3\3\4\3\4\3"+
-		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5 \n\5\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6.\n\6\3\6\2\2\7\2\4\6\b\n\2\2\2.\2\f\3\2"+
-		"\2\2\4\21\3\2\2\2\6\23\3\2\2\2\b\37\3\2\2\2\n-\3\2\2\2\f\r\5\4\3\2\r\3"+
-		"\3\2\2\2\16\22\5\b\5\2\17\22\5\n\6\2\20\22\5\6\4\2\21\16\3\2\2\2\21\17"+
-		"\3\2\2\2\21\20\3\2\2\2\22\5\3\2\2\2\23\24\7\3\2\2\24\7\3\2\2\2\25\26\7"+
-		"\4\2\2\26\27\5\b\5\2\27\30\7\5\2\2\30\31\7\5\2\2\31\32\7\5\2\2\32 \3\2"+
-		"\2\2\33\34\7\4\2\2\34\35\7\5\2\2\35\36\7\5\2\2\36 \7\5\2\2\37\25\3\2\2"+
-		"\2\37\33\3\2\2\2 \t\3\2\2\2!\"\7\4\2\2\"#\5\n\6\2#$\7\5\2\2$%\7\5\2\2"+
-		"%&\7\5\2\2&\'\7\6\2\2\'.\3\2\2\2()\7\4\2\2)*\7\5\2\2*+\7\5\2\2+,\7\5\2"+
-		"\2,.\7\6\2\2-!\3\2\2\2-(\3\2\2\2.\13\3\2\2\2\5\21\37-";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\6+\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\3\2\3\2\3\3\3\3\5\3\17\n\3\3\4\3\4\3\4\3\4\3\4\3\4"+
+		"\3\4\3\4\3\4\3\4\5\4\33\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
+		"\5\3\5\5\5)\n\5\3\5\2\2\6\2\4\6\b\2\2\2)\2\n\3\2\2\2\4\16\3\2\2\2\6\32"+
+		"\3\2\2\2\b(\3\2\2\2\n\13\5\4\3\2\13\3\3\2\2\2\f\17\5\6\4\2\r\17\5\b\5"+
+		"\2\16\f\3\2\2\2\16\r\3\2\2\2\17\5\3\2\2\2\20\21\7\3\2\2\21\22\5\6\4\2"+
+		"\22\23\7\4\2\2\23\24\7\4\2\2\24\25\7\4\2\2\25\33\3\2\2\2\26\27\7\3\2\2"+
+		"\27\30\7\4\2\2\30\31\7\4\2\2\31\33\7\4\2\2\32\20\3\2\2\2\32\26\3\2\2\2"+
+		"\33\7\3\2\2\2\34\35\7\3\2\2\35\36\5\b\5\2\36\37\7\4\2\2\37 \7\4\2\2 !"+
+		"\7\4\2\2!\"\7\5\2\2\")\3\2\2\2#$\7\3\2\2$%\7\4\2\2%&\7\4\2\2&\'\7\4\2"+
+		"\2\')\7\5\2\2(\34\3\2\2\2(#\3\2\2\2)\t\3\2\2\2\5\16\32(";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

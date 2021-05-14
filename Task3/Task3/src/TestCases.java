@@ -156,21 +156,6 @@ public class TestCases {
 		testInput(input, false, 5);
 	}
 	@Test
-	public void emptystringtest(){
-		String input = " ";
-		testInput(input,false,1);
-	}
-	/*@Test
-	public void emptyempty(){
-		String input = " ";
-		testInput(input,false,1);
-	}
-	@Test
-	public void emtpyemptyempty(){
-		String input = "  ";
-		testInput(input, true,0);
-	}*/
-	@Test
 	public void randomlanguage(){
 		String input = "aabbbcbbbc";
 		testInput(input, false, 10);
@@ -179,6 +164,21 @@ public class TestCases {
 	public void testonlyCCCC(){
 		String input = "cccccc";
 		testInput(input, true, 6);
+	}
+	@Test
+	public void test3N2(){
+		String input = "aaabbbbbbbbb";
+		testInput(input, false,12);
+	}
+	@Test
+	public void test3N3(){
+		String input = "aaabbbcbbbcbbbc";
+		testInput(input, false, 15);
+	}
+	@Test
+	public void invalidstringpq(){
+		String input = "abbbq";
+		testInput(input, true, 4);
 	}
 }
 

@@ -19,6 +19,59 @@ public class Ex2Task2Test
     private final int MAX_EXECUTION_TIME = 1 * 000; // in milliseconds
 
 
+      /*String[] lines = {
+                "S -> A B C",
+                "A -> r A r | EPSILON",
+                "B -> A A A | EPSILON",
+                "C -> B"
+        };
+    List<Result> expectedResults = new ArrayList<Result>();
+        expectedResults.addAll(
+                Arrays.asList(
+                new Result("a", "a", ""),
+                new Result("e", "e", ""),
+                new Result("EPSILON", "EPSILON", ""),
+                new Result("r", "r", ""),
+                new Result("S", "a EPSILON", "r e EOF"),
+                new Result("R", "r EPSILON", "e"),
+                new Result("Q", "EPSILON", "r")
+            )
+                    );*/
+      @Test(timeout = MAX_EXECUTION_TIME)
+      public void testStandardExample2() {
+          String[] lines2 = {
+            "S -> simple | begin Send | R",
+            "R -> a S Q e | EPSILON",
+            "Q -> EPSILON"
+      };
+    List<Result> expectedResults2 = new ArrayList<Result>();
+        expectedResults2.addAll(
+                Arrays.asList(
+                new Result("a", "a", ""),
+                new Result("e", "e", ""),
+                new Result("EPSILON", "EPSILON", ""),
+                new Result("simple", "simple", ""),
+                new Result("begin","begin",""),
+                new Result("S", "simple begin a EPSILON", "e EOF"),
+                new Result("R", "a EPSILON", "EOF"),
+                new Result("Q", "EPSILON", "e")
+            )
+        );
+
+    List<Rule> rules2 = Arrays.asList(lines2).stream()
+            .flatMap((s) -> ruleReader(s))
+            .collect(Collectors.toList());
+    // Print the rules
+        rules2.stream().forEachOrdered(System.out::println);
+
+    // Run your Algorithm
+    List<Result> userResults = Algorithm.computeFirstFollow("S", rules2);
+
+    performChecksOn(
+            userResults, expectedResults2);
+
+}
+
     @Test(timeout = MAX_EXECUTION_TIME)
     public void testStandardExample() {
         String[] lines = {
@@ -36,7 +89,7 @@ public class Ex2Task2Test
                 new Result("EPSILON", "EPSILON", ""),
                 new Result("r", "r", ""),
                 new Result("S", "a EPSILON", "r e EOF"),
-                new Result("R", "r EPSILON", "e"),
+                new Result("R", "r EPSILON e", "e"),
                 new Result("Q", "EPSILON", "r")
             )
         );
@@ -49,7 +102,7 @@ public class Ex2Task2Test
         rules.stream().forEachOrdered(System.out::println);
 
         // Run your Algorithm
-        List<Result> userResults = alg23.computeFirstFollow("S", rules);
+        List<Result> userResults = Algorithm.computeFirstFollow("S", rules);
 
         performChecksOn(
             userResults, expectedResults);

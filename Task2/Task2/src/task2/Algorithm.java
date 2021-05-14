@@ -1,16 +1,11 @@
 package task2;
 
 import java.awt.geom.RectangularShape;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 // the imports give you some hints of what we used to implement it
-// there are infinite ways to code the same algorithm, you might need these 
+// there are infinite ways to code the same algorithm, you might need these
 // imports or you might do perfectly even with different ones.
 // Note that you can only use the Java standard library.
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,77 +22,106 @@ public class Algorithm {
     /**
      * Algorithm to compute the first and follow sets.
      *
-     * @param  rules derivation rules of the input grammar
+     * @param rules derivation rules of the input grammar
      * @return list of result (one for each non-terminal).
      */
     public static List<Result> computeFirstFollow(String startingSymbol, List<Rule> rules) {
 
         List<Result> results = new ArrayList<Result>();//used for results
-        HashMap<String,Set<String>> firstSet = new HashMap<String,Set<String>>();//used for firstset
-        HashMap<String,Set<String>>  followSet = new HashMap<String,Set<String>>();//used for followset
+        HashMap<String, Set<String>> firstSet = new HashMap<String, Set<String>>();//used for firstset
+
+        HashMap<String, Set<String>> followSet = new HashMap<String, Set<String>>();//used for followset
+        HashMap<String, Boolean> epsilonRule = new HashMap<String, Boolean>();//used to check if right rule contains epsilon
         Set<String> symbols = new HashSet<>(); //all symbols
+        Set<String> terminals = new HashSet<>();
+        Set<String> nonTerminals = new HashSet<>();
+        boolean isConstant = false;
 
-
-        for(Rule allSymbols : rules){//get all symbols
-            symbols.add(allSymbols.getLeft());//on the left side+
-            symbols.addAll(allSymbols.getRight());
+        for (Rule allSymbols : rules) {//get all symbols
+            symbols.add(allSymbols.getLeft());//on the left side
+            symbols.addAll(allSymbols.getRight());//on the right side
         }
-        symbols.remove("|");
+        symbols.remove("|");//remove |
 
-        for(String symbol: symbols){
+        for (Rule allSymbols : rules) {//add all nonTerminals
+            nonTerminals.add(allSymbols.getLeft());
+        }
+        for (String symbol : symbols) {//used to add all terminals to their respective firstset
+            for (Rule rule : rules) {
+                Set<String> tempresults = new HashSet<>();//used to collect all temp results
+                if (!(rule.getLeft().equals(symbol))) {
+                    terminals.add(symbol);
+                    tempresults.add(symbol);
+                    firstSet.put(symbol, tempresults);
+                    epsilonRule.put(symbol, false);
+                } else {
+                    nonTerminals.add(symbol);
+                    firstSet.put(symbol, tempresults);
+                    epsilonRule.put(symbol, checkforepsilonrule(symbol, rules));
+                    break;
+                }
+            }
+        }
+        terminals.removeAll(nonTerminals);
+
+        for (String symbol : symbols) {//used to add "" to all terminal followsets
             for (Rule rule : rules) {
                 Set<String> tempresults = new HashSet<>();//used to collect all temp results
                 if ((rule.getLeft().equals(symbol))) {
-                    tempresults.add("todo");
-                    firstSet.put(symbol,tempresults);
+                    if (symbol.equals(startingSymbol))
+                        tempresults.add("EOF");
+                    followSet.put(symbol, tempresults);
                     break;
                 } else {
-                    tempresults.add(symbol);
-                    firstSet.put(symbol,tempresults);
-                }
-            }
-        }
-        for(String symbol: symbols){
-            for(Rule rule: rules) {
-                Set<String> tempresults = new HashSet<>();//used to collect all temp results
-                if ((rule.getLeft().equals(symbol))) {
-                    if(symbol.equals(startingSymbol))
-                        tempresults.add("EOF");
-                        followSet.put(symbol,tempresults);
-                    break;
-                }else{
                     tempresults.add("");
-                    followSet.put(symbol,tempresults);
+                    followSet.put(symbol, tempresults);
                 }
             }
         }
 
-        for(String key: firstSet.keySet()){//output all firstsets
-            System.out.println("symbol : " + key + " first : " + firstSet.get(key));
+                for (String key : firstSet.keySet()) {//output all firstsets
+                    System.out.println("symbol : " + key + " first : " + firstSet.get(key));
+                }
+                for (String key : followSet.keySet()) {//output all followsets
+                    System.out.println("symbol : " + key + " follow : " + followSet.get(key));
+                }
+                System.out.println("all symbols: " + symbols);//output all symbols
+
+                for (String key : terminals) {//output all terminals
+                    System.out.println("terminal: " + key);
+                }
+                for (String key : nonTerminals) {//output all nonTerminals
+                    System.out.println("nonterminal: " + key);
+                }
+                for (String pairs : symbols) {//adding all results
+                    firstSet.get(pairs);
+                    followSet.get(pairs);
+                    Result intermediateResult = new Result(pairs, firstSet.get(pairs), followSet.get(pairs));
+                    results.add(intermediateResult);
+                }
+                return results;
+            }
+
+    public static Boolean checkforepsilonrule (String nonTerminal, List < Rule > rules){
+        for (Rule rule : rules) {
+            if (rule.getLeft().equals(nonTerminal)) {
+                for (String right : rule.getRight()) {
+                    if (right.equals("EPSILON")) {
+                        return true;
+                    }
+                }
+            }
         }
-        for(String key: followSet.keySet()){//output all followsets
-            System.out.println("symbol : " + key + " follow : " + followSet.get(key));
-        }
-        System.out.println("all symbols: " + symbols);//output all symbols
-
-        /*
-        add followset and firstset to results
-         */
-
-
-
-        return results;
+        return false;
     }
 
-    
-    // DECLARE HELPER STATIC FUNCTIONs HERE (IN CASE YOU NEED THEM)
-    public static Stream<Rule> ruleReader(String rawLine) {
+    public static Stream<Rule> ruleReader (String rawLine){
         String[] parts = rawLine.split("->");
         String head = parts[0].trim();
         String tail = parts[1].trim();
 
         String[] tailParts = null;
-        if (tail.indexOf("|") != -1) {
+        if (tail.contains("|")) {
             tailParts = tail.split("\\|");
         } else {
             tailParts = new String[1];
@@ -111,60 +135,17 @@ public class Algorithm {
         return rules.stream();
     }
 
-    public static String helperFunction(String whatever) {
-        return "WHAT YOU NEED";
-    }
-    public static void main(String[] args){
+    public static void main (String[]args){
         String start = "S";
-        List<Rule> rules = new ArrayList<Rule>();
+        String[] lines = {
+                "S -> simple | begin Send | R",
+                "R -> a S Q e | EPSILON",
+                "Q -> EPSILON"
+        };
 
-        Rule rule1 = new Rule("S","simple | begin Send | R");
-        Rule rule2 = new Rule("R", "a S Q e | EPSILON");
-        Rule rule3 = new Rule("Q", "EPSILON");
-        rules.add(rule1);
-        rules.add(rule2);
-        rules.add(rule3);
-
-        System.out.print(computeFirstFollow(start,rules));
-        /*List<Rule> jrules = Arrays.asList(rules).stream()
+        List<Rule> ruless = Arrays.asList(lines).stream()
                 .flatMap((s) -> ruleReader(s))
                 .collect(Collectors.toList());
-        // Print the rules*/
-        rules.stream().forEachOrdered(System.out::println);
-
-
-        /*for(Rule ok: rules ){
-            String rubo = ok.getRight().toString();
-            String[] output = rubo.split("(\\h\\|)");
-            for (String schwuchtel: output){
-                //System.out.print(schwuchtel);
-            }
-            String search = ok.getRight().toString();
-            String segments[] = search.split("(\\|)");
-            System.out.print(Arrays.toString(segments));
-        }*/
-        /*
-        String trytr = "simple | begin Send | R";
-        String[] output = trytr.split("(\\h\\|)");
-        for (String schwuchtel: output){
-           // System.out.print(schwuchtel);
-        }*/
-
-        /*
-        output should be
-        new Result("S", "simple, begin", "end, EOF"),
-        new Result("R", "a, EPSILON", "EOF"),
-        new Result("Q", "EPSILON", "e"),
-        new Result("simple", "simple", ""),
-        new Result("begin", "begin", ""),
-        new Result("end", "end", ""),
-        new Result("a", "a", ""),
-        new Result("e", "e", ""),
-        new Result("EPSILON", "EPSILON", ""),
-         */
-
+        System.out.print(computeFirstFollow(start, ruless));
     }
-
 }
-
-
