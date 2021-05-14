@@ -19,85 +19,32 @@ public class Ex2Task2Test
     private final int MAX_EXECUTION_TIME = 1 * 000; // in milliseconds
 
 
-      /*String[] lines = {
-                "S -> A B C",
-                "A -> r A r | EPSILON",
-                "B -> A A A | EPSILON",
-                "C -> B"
-        };
-    List<Result> expectedResults = new ArrayList<Result>();
-        expectedResults.addAll(
-                Arrays.asList(
-                new Result("a", "a", ""),
-                new Result("e", "e", ""),
-                new Result("EPSILON", "EPSILON", ""),
-                new Result("r", "r", ""),
-                new Result("S", "a EPSILON", "r e EOF"),
-                new Result("R", "r EPSILON", "e"),
-                new Result("Q", "EPSILON", "r")
-            )
-                    );*/
-      @Test(timeout = MAX_EXECUTION_TIME)
-      public void testStandardExample2() {
-          String[] lines2 = {
-            "S -> simple | begin Send | R",
-            "R -> a S Q e | EPSILON",
-            "Q -> EPSILON"
-      };
-    List<Result> expectedResults2 = new ArrayList<Result>();
-        expectedResults2.addAll(
-                Arrays.asList(
-                new Result("a", "a", ""),
-                new Result("e", "e", ""),
-                new Result("EPSILON", "EPSILON", ""),
-                new Result("simple", "simple", ""),
-                new Result("begin","begin",""),
-                new Result("S", "simple begin a EPSILON", "e EOF"),
-                new Result("R", "a EPSILON", "EOF"),
-                new Result("Q", "EPSILON", "e")
-            )
-        );
-
-    List<Rule> rules2 = Arrays.asList(lines2).stream()
-            .flatMap((s) -> ruleReader(s))
-            .collect(Collectors.toList());
-    // Print the rules
-        rules2.stream().forEachOrdered(System.out::println);
-
-    // Run your Algorithm
-    List<Result> userResults = Algorithm.computeFirstFollow("S", rules2);
-
-    performChecksOn(
-            userResults, expectedResults2);
-
-}
-
     @Test(timeout = MAX_EXECUTION_TIME)
     public void testStandardExample() {
         String[] lines = {
-            "S -> a S R e | EPSILON",
-            "R -> r Q r | EPSILON",
-            "Q -> EPSILON"
+                "S -> a S R e | EPSILON",
+                "R -> r Q r | EPSILON",
+                "Q -> EPSILON"
         };
 
         // expected result
         List<Result> expectedResults = new ArrayList<Result>();
         expectedResults.addAll(
-            Arrays.asList(
-                new Result("a", "a", ""),
-                new Result("e", "e", ""),
-                new Result("EPSILON", "EPSILON", ""),
-                new Result("r", "r", ""),
-                new Result("S", "a EPSILON", "r e EOF"),
-                new Result("R", "r EPSILON e", "e"),
-                new Result("Q", "EPSILON", "r")
-            )
+                Arrays.asList(
+                        new Result("a", "a", ""),
+                        new Result("e", "e", ""),
+                        new Result("EPSILON", "EPSILON", ""),
+                        new Result("r", "r", ""),
+                        new Result("S", "a EPSILON", "r e EOF"),
+                        new Result("R", "r EPSILON", "e"),
+                        new Result("Q", "EPSILON", "r")
+                )
         );
 
         // Parse the rules
         List<Rule> rules = Arrays.asList(lines).stream()
-            .flatMap((s) -> ruleReader(s))
-            .collect(Collectors.toList());
+                .flatMap((s) -> ruleReader(s))
+                .collect(Collectors.toList());
         // Print the rules
         rules.stream().forEachOrdered(System.out::println);
 
@@ -105,7 +52,7 @@ public class Ex2Task2Test
         List<Result> userResults = Algorithm.computeFirstFollow("S", rules);
 
         performChecksOn(
-            userResults, expectedResults);
+                userResults, expectedResults);
 
     }
 
@@ -113,45 +60,45 @@ public class Ex2Task2Test
     @Test(timeout = MAX_EXECUTION_TIME)
     public void testPizzaExample() {
         String[] lines = {
-            "start -> menu",
-            "menu -> pizza dollar price | pizza dollar price ; menu",
-            "pizza -> margherita | diavola | napoletana",
-            "price -> 1 | 2 | 3 | 4 "
+                "start -> menu",
+                "menu -> pizza dollar price | pizza dollar price ; menu",
+                "pizza -> margherita | diavola | napoletana",
+                "price -> 1 | 2 | 3 | 4 "
         };
 
         // expected result
         List<Result> expectedResults = new ArrayList<Result>();
         expectedResults.addAll(
-            Arrays.asList(
-                new Result("dollar", "dollar", ""),
-                new Result(";", ";", ""),
-                new Result("1", "1", ""),
-                new Result("2", "2", ""),
-                new Result("3", "3", ""),
-                new Result("4", "4", ""),
-                new Result("margherita", "margherita", ""),
-                new Result("diavola", "diavola", ""),
-                new Result("napoletana", "napoletana", ""),
-                new Result("pizza", "margherita diavola napoletana", "dollar"),
-                new Result("price", "1 2 3 4", "; EOF"),
-                new Result("menu", "margherita diavola napoletana", "EOF"),
-                new Result("start", "margherita diavola napoletana", "EOF")
-            )
+                Arrays.asList(
+                        new Result("dollar", "dollar", ""),
+                        new Result(";", ";", ""),
+                        new Result("1", "1", ""),
+                        new Result("2", "2", ""),
+                        new Result("3", "3", ""),
+                        new Result("4", "4", ""),
+                        new Result("margherita", "margherita", ""),
+                        new Result("diavola", "diavola", ""),
+                        new Result("napoletana", "napoletana", ""),
+                        new Result("pizza", "margherita diavola napoletana", "dollar"),
+                        new Result("price", "1 2 3 4", "; EOF"),
+                        new Result("menu", "margherita diavola napoletana", "EOF"),
+                        new Result("start", "margherita diavola napoletana", "EOF")
+                )
         );
 
         // Parse the rules
         List<Rule> rules = Arrays.asList(lines).stream()
-            .flatMap((s) -> ruleReader(s))
-            .collect(Collectors.toList());
+                .flatMap((s) -> ruleReader(s))
+                .collect(Collectors.toList());
         // Print the rules
         rules.stream().forEachOrdered(System.out::println);
 
         // Run your Algorithm
-        List<Result> userResults = alg23.computeFirstFollow("start", rules);
+        List<Result> userResults = Algorithm.computeFirstFollow("start", rules);
 
         // Verify your result matches the expected result
         performChecksOn(
-            userResults, expectedResults);
+                userResults, expectedResults);
 
     }
 
@@ -230,31 +177,31 @@ public class Ex2Task2Test
 
 
 
-    	float percentage_correct_firstsets = 0;
+        float percentage_correct_firstsets = 0;
 
-    	percentage_correct_firstsets =
-    			performChecksOnFirstSet(
-    					userResults, expectedResults);
+        percentage_correct_firstsets =
+                performChecksOnFirstSet(
+                        userResults, expectedResults);
 
-    	float percentage_correct_followsets = 0;
+        float percentage_correct_followsets = 0;
 
-    	percentage_correct_followsets =
-    			performChecksOnFollowSet(
-    					userResults, expectedResults);
+        percentage_correct_followsets =
+                performChecksOnFollowSet(
+                        userResults, expectedResults);
 
-    	if (userResults.size() != expectedResults.size()) {
-    		System.out.println("The number of first/follow sets provided doesn't match the number of sybol in the grammar:");
+        if (userResults.size() != expectedResults.size()) {
+            System.out.println("The number of first/follow sets provided doesn't match the number of sybol in the grammar:");
             System.out.println("Expected:");
             System.out.println(expectedResults);
             System.out.println("User Sets:");
             System.out.println(userResults);
-    	}
+        }
 
         assertTrue(userResults.size() == expectedResults.size());
 
         assertTrue ((
-        		percentage_correct_firstsets == 1 &&
-        		percentage_correct_followsets == 1)
+                percentage_correct_firstsets == 1 &&
+                        percentage_correct_followsets == 1)
         );
 
     }
@@ -293,3 +240,4 @@ public class Ex2Task2Test
     }
 
 }
+
